@@ -60,9 +60,9 @@ public class DogAnimationController : MonoBehaviour
             _animator.SetBool(AnimatorResting, _isResting);
         }
 
-        if (_isGrounded != _controller.isGrounded)
+        if (_isGrounded != _thirdPerson.Grounded)
         {
-            _isGrounded = _controller.isGrounded;
+            _isGrounded = _thirdPerson.Grounded;
             _animator.SetBool(AnimatorGrounded, _isGrounded);
         }
 
@@ -74,6 +74,6 @@ public class DogAnimationController : MonoBehaviour
 
     void OnJump(InputAction.CallbackContext ctx)
     {
-        if (_controller.isGrounded && !_thirdPerson.IsResting) _animator.SetTrigger(AnimatorJump);
+        if (_thirdPerson.Grounded && !_thirdPerson.IsResting) _animator.SetTrigger(AnimatorJump);
     }
 }

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LeafTextures
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: e1e4c92e2a6b7482c8e676d2083e79c5, type: 3}
+    - {fileID: 2800000, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+    totalSpriteSurfaceArea: 1127316
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 1801788313114433280, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: -4766105101654017065, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: -4598565557831936152, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: 6654903852781514473, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: 5405803478692176790, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: 1507541635500154009, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: -4825329036060768259, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: 7001673897202450749, guid: 95a4b72067b9345f2b5cb1dbb9fcd0e9, type: 3}
+  - {fileID: -2057757251818786492, guid: e1e4c92e2a6b7482c8e676d2083e79c5, type: 3}
+  - {fileID: 1781032611354615407, guid: e1e4c92e2a6b7482c8e676d2083e79c5, type: 3}
+  - {fileID: -2232906459842152018, guid: e1e4c92e2a6b7482c8e676d2083e79c5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - PinkPetals_SH_3
+  - PinkPetals_SH_2
+  - PinkPetals_SH_1
+  - PinkPetals_SH_0
+  - PinkPetals_SH_7
+  - PinkPetals_SH_6
+  - PinkPetals_SH_5
+  - PinkPetals_SH_4
+  - Leaves_SH_2
+  - Leaves_SH_0
+  - Leaves_SH_1
+  m_Tag: LeafTextures
+  m_IsVariant: 0

@@ -21,6 +21,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpSpeed = 5;
     public float airControl = 0.2f;
     public float gravityScale = 1f;
+    public float fallTimeThreshold = 0.15f;
 
     public Transform cam;
     
@@ -38,13 +39,16 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public float VerticalSpeed => _verticalVelocity;
     public bool IsResting => _isResting;
+    public bool Grounded => _isGrounded;
 
     private bool _isResting;
     private bool _isSprinting;
+    private bool _isGrounded;
 
     private float _turnSmoothVelocity;
     private float _verticalVelocity;
     private float _sprintAmount;
+    private float _lastGrounded;
 
     private Vector2 _movement;
     private Vector2 _movementSmoothVelocity;
@@ -62,6 +66,9 @@ public class ThirdPersonMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        _lastGrounded = Time.time;
+        
         _controller = GetComponent<CharacterController>();
         
         _controls.Player.Movement.performed += OnMove;
@@ -160,6 +167,10 @@ public class ThirdPersonMovement : MonoBehaviour
         
         // Move
         _controller.Move(direction);
+        
+        // Calculate isGrounded
+        if (_controller.isGrounded) _lastGrounded = Time.time;
+        _isGrounded = Time.time - _lastGrounded < fallTimeThreshold;
     }
 
     void ApplyGravity()
@@ -177,6 +188,8 @@ public class ThirdPersonMovement : MonoBehaviour
     void Jump()
     {
         _verticalVelocity = jumpSpeed;
+        _isGrounded = false;
+        _lastGrounded = 0;
     }
 
     void OnMove(InputAction.CallbackContext ctx)
