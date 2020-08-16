@@ -325,6 +325,55 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""System"",
+            ""id"": ""158b54fc-42fa-48d6-8c20-0e70d79312ae"",
+            ""actions"": [
+                {
+                    ""name"": ""Help"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2f85500-9bb6-4797-ab1f-3c9f69b0764e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""bf6a02c5-e1e8-4b70-af9b-069e4fa30ae5"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard|Mouse"",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed7a663e-5a49-4fa2-af36-a3c2e5076dba"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard|Mouse"",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f56ead8c-442e-440d-a4ab-f240cf8bb7f0"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -364,6 +413,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Rest = m_Player.FindAction("Rest", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_CameraControl = m_Player.FindAction("CameraControl", throwIfNotFound: true);
+        // System
+        m_System = asset.FindActionMap("System", throwIfNotFound: true);
+        m_System_Help = m_System.FindAction("Help", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -474,6 +526,39 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // System
+    private readonly InputActionMap m_System;
+    private ISystemActions m_SystemActionsCallbackInterface;
+    private readonly InputAction m_System_Help;
+    public struct SystemActions
+    {
+        private @InputMaster m_Wrapper;
+        public SystemActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Help => m_Wrapper.m_System_Help;
+        public InputActionMap Get() { return m_Wrapper.m_System; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SystemActions set) { return set.Get(); }
+        public void SetCallbacks(ISystemActions instance)
+        {
+            if (m_Wrapper.m_SystemActionsCallbackInterface != null)
+            {
+                @Help.started -= m_Wrapper.m_SystemActionsCallbackInterface.OnHelp;
+                @Help.performed -= m_Wrapper.m_SystemActionsCallbackInterface.OnHelp;
+                @Help.canceled -= m_Wrapper.m_SystemActionsCallbackInterface.OnHelp;
+            }
+            m_Wrapper.m_SystemActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Help.started += instance.OnHelp;
+                @Help.performed += instance.OnHelp;
+                @Help.canceled += instance.OnHelp;
+            }
+        }
+    }
+    public SystemActions @System => new SystemActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -499,5 +584,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnRest(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnCameraControl(InputAction.CallbackContext context);
+    }
+    public interface ISystemActions
+    {
+        void OnHelp(InputAction.CallbackContext context);
     }
 }

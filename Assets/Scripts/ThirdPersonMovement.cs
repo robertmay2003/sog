@@ -67,6 +67,7 @@ public class ThirdPersonMovement : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         _lastGrounded = Time.time;
         
         _controller = GetComponent<CharacterController>();
